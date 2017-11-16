@@ -2,6 +2,7 @@ package com.ocr.visuel;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,6 +15,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.ocr.dico.MyDico;
 import com.ocr.observer.Observateur;
 import com.ocr.rules.Point;
@@ -21,7 +25,12 @@ import com.ocr.rules.Point.PseudoException;
 import com.ocr.rules.Rule;
 import com.ocr.visuel.images.ImgPanel;
 
-public class NewPane implements AllPane{
+/**
+ * Class to handle the game view :
+ * @author John
+ *
+ */
+public class NewPane extends JPanel implements AllPane {
 
 	private JPanel parentPanel ;
 	private JPanel panBtns = new JPanel();
@@ -35,7 +44,16 @@ public class NewPane implements AllPane{
 	private MyDico dico;
 	private Point curPts;
 
+	// logging lines for tracing program execution
+	private static Logger logger = LogManager.getRootLogger();
+
+	/**
+	 * New Pan constructor which call the dictionary
+	 * We also initialize the nb of points
+	 */
 	public NewPane() {
+		
+		super();
 		
 		try {
 			this.dico =  new MyDico();
@@ -50,15 +68,15 @@ public class NewPane implements AllPane{
 		
 	}
 	
-	public void initPane(JPanel jpan) {
+	public void paintComponent(Graphics gjpan) {
 
-		parentPanel = jpan;
+
 		// set grid layout for whole panel
-		jpan.setLayout(new GridLayout(1,1));
+		this.setLayout(new GridLayout(1,1));
 
 		//Add 2 panels :
-		jpan.add(panBtns);	
-		jpan.add(myImgPanel);
+		this.add(panBtns);	
+		this.add(myImgPanel);
 
 		panBtns.setBackground(Color.white);
 		panBtns.setLayout(new BoxLayout(panBtns, BoxLayout.PAGE_AXIS));
@@ -171,19 +189,11 @@ public class NewPane implements AllPane{
 
 	}
 
-	public void removeMe() {
 
-		myBtns1.removeAll();
-		myBtns2.removeAll();
-		myBtns3.removeAll();
-		panBtns.removeAll();
-		myImgPanel.removeAll();
-
-	}
 	
 	public void clearMe() {
 
-		removeMe();
+		removeTout();
 		
 		try {
 			this.dico =  new MyDico();
@@ -193,7 +203,14 @@ public class NewPane implements AllPane{
 			e.printStackTrace();
 		}
 		
-		initPane(parentPanel);
+		repaint();
 		
+	}
+
+	@Override
+	public void removeTout() {
+		// TODO Auto-generated method stub
+		this.removeAll();
+		this.revalidate();
 	}
 }

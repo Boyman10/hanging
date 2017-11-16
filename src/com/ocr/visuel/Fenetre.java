@@ -2,7 +2,11 @@ package com.ocr.visuel;
 
 import javax.swing.JFrame;
 
-//notre PANEL est l'observateur
+/**
+ * Main Frame where we load the main Panel starting from About Panel
+ * @author John
+ *
+ */
 //https://openclassrooms.com/courses/apprenez-a-programmer-en-java/interagir-avec-des-boutons
 
 public class Fenetre extends JFrame{
@@ -14,15 +18,16 @@ public class Fenetre extends JFrame{
 
 	public Fenetre(){
 
-		this.setTitle("Ma JFrame qui PEND");
+		this.setTitle("Hanged man game by @Boyma10");
 		this.setSize(1200,800);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 
-		// Now our main panel : about 
+		// Now our main panel  
 		defaultPan = new MainPane();
 		
 		ourMenu = new MyMenu(defaultPan);
+		
 		// We add our menu now :
 		this.setJMenuBar(ourMenu);
 		

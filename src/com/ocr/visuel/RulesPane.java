@@ -3,25 +3,29 @@ package com.ocr.visuel;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.ocr.rules.Rule;
 
-public class RulesPane  implements AllPane {
+public class RulesPane extends JPanel implements AllPane {
 
+
+	private static final long serialVersionUID = 2040261851977514813L;
 	private JLabel myTitle = new JLabel("Le jeu du PENDU :");
 	private JLabel mySubTitle = new JLabel("COMPTE DES POINTS :");
 	private JLabel myRules ;
 	
 	public RulesPane() {
 		
+		super();
 		myRules = new JLabel(getRules());
 		
 	}
 
-	public void initPane(JPanel jpan) {
+	public void paintComponent(Graphics g) {
 
 		//Définition d'une police d'écriture
 		Font police = new Font("Tahoma", Font.BOLD, 20);
@@ -48,12 +52,12 @@ public class RulesPane  implements AllPane {
 		myRules.setHorizontalAlignment(JLabel.CENTER);		
 		
 		// on définit le type de layout à employer pour notre panneau :
-		jpan.setLayout(new BorderLayout()); 	
+		this.setLayout(new BorderLayout()); 	
 		
 		// ajout du titre en haut de panneau :
-		jpan.add(myTitle, BorderLayout.NORTH);
-		jpan.add(mySubTitle, BorderLayout.CENTER);
-		jpan.add(myRules, BorderLayout.SOUTH);
+		this.add(myTitle, BorderLayout.NORTH);
+		this.add(mySubTitle, BorderLayout.CENTER);
+		this.add(myRules, BorderLayout.SOUTH);
 	}
 
 	// method to get all the rules about points in le Pendu :
@@ -76,9 +80,11 @@ public class RulesPane  implements AllPane {
 		return str;
 	}
 	
-	public void removeMe() {
-		
-		myRules.removeAll();
-		
+
+	@Override
+	public void removeTout() {
+		// TODO Auto-generated method stub
+		this.removeAll();
+		this.revalidate();
 	}
 }

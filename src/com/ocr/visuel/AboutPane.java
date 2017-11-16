@@ -3,56 +3,74 @@ package com.ocr.visuel;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.ocr.visuel.images.ImgPanel;
 
-public class AboutPane implements AllPane{
+/**
+ * AboutPane implementing the interface 
+ * It displays only text via a 
+ * @author John
+ *
+ */
+public class AboutPane  extends JPanel implements AllPane {
 
-	private JLabel myTitle = new JLabel("Bienvenue dans le jeu du pendu !");
+	private static final long serialVersionUID = 2788078247138018951L;
+	private JLabel myTitle = new JLabel("Welcome onto Hanged Man game !");
 	private ImgPanel myImagePnl = new ImgPanel();
-	//private JTextPane myTextPnl = new JTextPane();
-	private JLabel myText = new JLabel("Vous avez 7 coups pour trouver le mot caché...");
 
+	private JLabel myText = new JLabel("You have 7 tries to find the word...");
+	
+	// logging lines for tracing program execution
+	private static Logger logger = LogManager.getRootLogger();
+	
 	public AboutPane() {
 		
-		myImagePnl.setMyImg("image1.jpg");
-		
+		super();
+		logger.info("Called about panel - constructor");
+		// nothing yet ...
 	}
 	
-	public void initPane(JPanel jpan) {
+	public void paintComponent(Graphics g) {
 
-		//Définition d'une police d'écriture
+		logger.info("About panel painting");
+		
+		removeTout();
+		
+		// we update the image :
+		myImagePnl.setMyImg("image1.jpg");
+		
+		// Define a style for our font :
 		Font police = new Font("Tahoma", Font.BOLD, 20);
-		//On l'applique au JLabel
+		// Applied to title :
 		myTitle.setFont(police);
-		//Changement de la couleur du texte
+		
+		// Define a  color
 		myTitle.setForeground(Color.black);
-		//On modifie l'alignement du texte grâce aux attributs statiques
-		//de la classe JLabel
+		// Alignment for our text
 		myTitle.setHorizontalAlignment(JLabel.CENTER);
 
-		// Ajout de texte 
-
-
+		// Adding text
 		myText.setHorizontalAlignment(JLabel.CENTER);
 		
 		
-		// ajout du titre en haut de panneau :
-		jpan.add(myTitle, BorderLayout.NORTH);
-		jpan.add(myImagePnl, BorderLayout.CENTER);
-		jpan.add(myText, BorderLayout.SOUTH);		
+		// The title on top and the rest down :
+		this.add(myTitle, BorderLayout.NORTH);
+		this.add(myImagePnl, BorderLayout.CENTER);
+		this.add(myText, BorderLayout.SOUTH);		
 	}
-	
-	public void removeMe() {
-		
-		myImagePnl.removeAll();
-		myTitle.removeAll();
-		myText.removeAll();
-		
+
+	@Override
+	public void removeTout() {
+		// TODO Auto-generated method stub
+		this.removeAll();
+		this.revalidate();
 	}
            	
 }

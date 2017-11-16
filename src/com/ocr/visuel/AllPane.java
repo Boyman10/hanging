@@ -1,8 +1,12 @@
 package com.ocr.visuel;
 
-import javax.swing.JPanel;
-
+/**
+ * Main interface with methods for each implementers
+ * @author John
+ *
+ */
 public interface AllPane {
-	public void initPane(JPanel jpan);
-	public void removeMe();
+	
+	// initialization method for each panel
+	public void removeTout();
 }

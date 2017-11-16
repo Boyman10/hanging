@@ -1,6 +1,9 @@
 package com.ocr.visuel;
 
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -8,8 +11,14 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 
+/**
+ * Our menu with all links
+ * @author John
+ */
 public class MyMenu extends JMenuBar {
 
 
@@ -22,46 +31,52 @@ public class MyMenu extends JMenuBar {
 	private JMenuItem quitter = new JMenuItem("Quitter");
 	private JMenu apropos = new JMenu("à".toUpperCase()  +  " propos");
 	private JMenuItem infos = new JMenuItem("Infos");
-
+	
+	// logging lines for tracing program execution
+	private static Logger logger = LogManager.getRootLogger();
+		
 	public MyMenu (MainPane pan) {
 
 		super();
-		// on initialise les menus :
+		
+		// Initialize menus :
 		fichier.add(scores);
 		fichier.addSeparator();
 		fichier.add(nouveau);
 		fichier.addSeparator();
 		fichier.add(regles);
 
-		// Nos mnemonics :
+		// Our mnemonics :
 		fichier.setMnemonic('F');
 		apropos.setMnemonic('o');
 
 		apropos.add(infos);
 		
-		// menu quitter le jeu :
+		// Quit the game :
 		quitter.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
 				System.exit(0);
 			}        
 		});
 
-		// menu regles :
+		// our game rules :
 		regles.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				RulesPane rPan = new RulesPane();
 				// change of panel
+				logger.info("Click on RULES menu - calling Rules Pan...");
 				pan.setPan(rPan);
 			}
 		});
 		
-		// menu About :
+		// About :
 		infos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				AboutPane rPan = new AboutPane();
 				// change of panel
+				logger.info("Click on ABOUT menu - calling About Pan...");
 				pan.setPan(rPan);
-				System.out.println("Changed to about Pan");
+				
 			}
 		});
 		
@@ -69,22 +84,21 @@ public class MyMenu extends JMenuBar {
 		nouveau.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				NewPane rPan = new NewPane();
+				logger.info("Click on NEW menu - calling NEW GAME Pan...");
 				// change of panel
 				pan.setPan(rPan);
-				System.out.println("Changed to NOUVEAU Pan");
+				
 			}
 		});
 		
-		
-
 
 		fichier.addSeparator();
 		fichier.add(quitter);
 
-		// on ajoute le tout à la menu bar
+		// We add everything to the menu bar
 		this.add(fichier);
 		this.add(apropos);
 	}
-
+ 
 
 }
