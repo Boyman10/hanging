@@ -38,7 +38,7 @@ public class AboutPane  extends JPanel implements AllPane {
 	}
 	
 	public void paintComponent(Graphics g) {
-
+		
 		logger.info("About panel painting");
 		
 		removeTout();
@@ -59,6 +59,8 @@ public class AboutPane  extends JPanel implements AllPane {
 		// Adding text
 		myText.setHorizontalAlignment(JLabel.CENTER);
 		
+	    // define the layout for the current pane
+	    this.setLayout(new BorderLayout());
 		
 		// The title on top and the rest down :
 		this.add(myTitle, BorderLayout.NORTH);

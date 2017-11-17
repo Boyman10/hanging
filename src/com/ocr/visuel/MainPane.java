@@ -20,7 +20,7 @@ public class MainPane extends JPanel {
 	private static final long serialVersionUID = -1009948418725756829L;
 
 	private AllPane myPan;
-	
+
 	// logging lines for tracing program execution
 	private static Logger logger = LogManager.getRootLogger();
 	
@@ -29,21 +29,22 @@ public class MainPane extends JPanel {
 	 */
 	public MainPane() {
 
-		super();
+		//super();
 		// first time we call the about panel :
 		myPan = new AboutPane();
 		logger.info("calling MainPane - launch About page");
+		
 	}
 
 	// Method called each time we paint the frame
 	public void paintComponent(Graphics g){
 
-		logger.info("MainPane - painting");
+		logger.info("MainPane - painting...");
 		
 		// first off : remove all components :
 		removeTout();
 		
-		super.paintComponent(g);
+		//super.paintComponent(g);
 
 		this.setBackground(Color.white);
 		
@@ -51,7 +52,7 @@ public class MainPane extends JPanel {
 		this.setLayout(new BorderLayout()); 
 
 		// we will ad generic data instead here as we are only calling about pane for now ------TODO-----
-		this.add((AboutPane)myPan);
+		this.add((JPanel)myPan);
 
 	}     
 
@@ -67,8 +68,8 @@ public class MainPane extends JPanel {
 		logger.info("MainPane - setting panel : " + thePan.getClass().getSimpleName());
 		
 		myPan = thePan;
-		removeTout();
-		
+
+		this.repaint();
 	}
 
 

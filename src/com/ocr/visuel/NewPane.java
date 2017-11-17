@@ -2,7 +2,7 @@ package com.ocr.visuel;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Graphics;
+
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -32,7 +32,11 @@ import com.ocr.visuel.images.ImgPanel;
  */
 public class NewPane extends JPanel implements AllPane {
 
-	private JPanel parentPanel ;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3797492138992111545L;
+
 	private JPanel panBtns = new JPanel();
 	private ImgPanel myImgPanel = new ImgPanel();
 	private JLabel mLbl = new JLabel("Mots trouvés :");
@@ -53,8 +57,8 @@ public class NewPane extends JPanel implements AllPane {
 	 */
 	public NewPane() {
 		
-		super();
-		
+		//super();
+		logger.info("Called New panel - constructor");
 		try {
 			this.dico =  new MyDico();
 			
@@ -66,11 +70,14 @@ public class NewPane extends JPanel implements AllPane {
 		// keep track of points by instantiating a new object on new panel
 		curPts = new Point();
 		
+		initComponent();
+		
 	}
 	
-	public void paintComponent(Graphics gjpan) {
+	public void initComponent() {
 
-
+		this.clearMe();
+		
 		// set grid layout for whole panel
 		this.setLayout(new GridLayout(1,1));
 

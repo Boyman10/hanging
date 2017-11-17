@@ -42,7 +42,6 @@ public class ImgPanel extends JPanel {
 	// The paint method from JPanel class
 	public void paintComponent(Graphics g){
 		
-		
 		logger.info("Painting image Panel");
 		
 		this.setBackground(Color.white);
@@ -50,6 +49,7 @@ public class ImgPanel extends JPanel {
 		
 		//center the image and draw it :
 		g.drawImage(myImg, this.getWidth() / 2 - myImg.getWidth(null) / 2 ,10, this);
+
 	} 	
 	
 	// Update the image :

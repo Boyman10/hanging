@@ -32,12 +32,21 @@ public class MyMenu extends JMenuBar {
 	private JMenu apropos = new JMenu("à".toUpperCase()  +  " propos");
 	private JMenuItem infos = new JMenuItem("Infos");
 	
+	private MainPane callingPan;
+	
 	// logging lines for tracing program execution
 	private static Logger logger = LogManager.getRootLogger();
 		
 	public MyMenu (MainPane pan) {
 
 		super();
+		callingPan = pan;
+		addMenu();
+	}
+	
+	public void addMenu() {
+	
+		logger.info("calling MyMenu 1 time");
 		
 		// Initialize menus :
 		fichier.add(scores);
@@ -65,17 +74,18 @@ public class MyMenu extends JMenuBar {
 				RulesPane rPan = new RulesPane();
 				// change of panel
 				logger.info("Click on RULES menu - calling Rules Pan...");
-				pan.setPan(rPan);
+				callingPan.setPan(rPan);
 			}
 		});
 		
 		// About :
 		infos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				AboutPane rPan = new AboutPane();
+				
+				callingPan.removeAll();
 				// change of panel
 				logger.info("Click on ABOUT menu - calling About Pan...");
-				pan.setPan(rPan);
+				callingPan.setPan(new AboutPane());
 				
 			}
 		});
@@ -83,11 +93,11 @@ public class MyMenu extends JMenuBar {
 		// Now our new Game panel :
 		nouveau.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				NewPane rPan = new NewPane();
+				callingPan.removeAll();
 				logger.info("Click on NEW menu - calling NEW GAME Pan...");
+								
 				// change of panel
-				pan.setPan(rPan);
-				
+				callingPan.setPan(new NewPane());
 			}
 		});
 		
